@@ -1,0 +1,175 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Typing Test</title>
+    <link rel="stylesheet" type="text/css" href="typing.css">
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+  
+    <div class="container">
+      <div class="stats">
+      <p>Kayzpro Typying Accuracy Tester</p>
+        <p>Time: <span id="timer">0s</span></p>
+        <p>Mistakes: <span id="mistakes">0</span></p>
+        
+      </div>
+      <div
+        id="quote"
+        onmousedown="return false"
+        onselectstart="return false"
+      ></div>
+      <textarea
+        rows="3"
+        id="quote-input"
+        placeholder="Type here when test starts..."
+      ></textarea>
+      <button id="start-test" onclick="startTest()">Start Test</button>
+      <button id="stop-test" onclick="displayResult()">Stop Test</button>
+      <div class="result">
+        <h3>Result</h3>
+        <div class="wrapper">
+          <p>Accuracy: <span id="accuracy"></span></p>
+          <p>Speed: <span id="wpm"></span></p>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      //Random quotes API url (minimum quote length 80 and maximum length 100)
+      const quote_api_url =
+        "https://api.quotable.io/random?minLength=80&maxLength=100";
+      const quoteSection = document.getElementById("quote");
+      const userInput = document.getElementById("quote-input");
+      let quote = "";
+      let time = 120;
+      let timer = "";
+      let mistakes = 0;
+
+      //Display random quotes
+      const renderNewQuote = async () => {
+        //Fetch contents from url
+        const response = await fetch(quote_api_url);
+        //store response
+        let data = await response.json();
+        //Access quote
+        quote = data.content;
+        //Array of characters in the quote
+        let arr = quote.split("").map((value) => {
+          //Wrap the characters in a span tag
+          return "<span class='quote-chars'>" + value + "</span>";
+        });
+        //join the array for displaying
+        quoteSection.innerHTML += arr.join("");
+      };
+      //Logic for comparing the input words with quote
+      userInput.addEventListener("input", () => {
+        //Select all the span tags/all characters
+        let quoteChars = document.querySelectorAll(".quote-chars");
+        //Create an array from the received span tags
+        quoteChars = Array.from(quoteChars);
+        //array of user input characters
+        let userInputChars = userInput.value.split("");
+        //loop through each character in quote
+        quoteChars.forEach((char, index) => {
+          /*
+      Check if char(quote character)=userInputChars[index](input character)
+      index would be the quote character's index
+    */
+          if (char.innerText == userInputChars[index]) {
+            //Green color if true
+            char.classList.add("success");
+          }
+          // If user hasn't entered anything or backspaced
+          else if (userInputChars[index] == null) {
+            // Remove classes if any
+            if (char.classList.contains("success")) {
+              char.classList.remove("success");
+            } else {
+              char.classList.remove("fail");
+            }
+          }
+          //if user enters wrong character
+          else {
+            //Checks if we have already added the fail class
+            if (!char.classList.contains("fail")) {
+              //increment and display mistakes variable
+              mistakes += 1;
+              //red color
+              char.classList.add("fail");
+            }
+            document.getElementById("mistakes").innerText = mistakes;
+          }
+        });
+        //Returns true if all the characters are entered correctly
+        let check = quoteChars.every((element) => {
+          return element.classList.contains("success");
+        });
+        //End test if all characters are correct
+        if (check) {
+          displayResult();
+        }
+      });
+      //Update Timer on screen
+      function updateTimer() {
+        if (time == 0) {
+          //End test if timer reaches 0
+          displayResult();
+        } else {
+          document.getElementById("timer").innerText = --time + "s";
+        }
+      }
+      //Sets timer
+      const timeReduce = () => {
+        time = 60;
+        timer = setInterval(updateTimer, 1000);
+      };
+      //End Test
+      const displayResult = () => {
+        //Display Result Div
+        document.getElementsByClassName("result")[0].style.display = "block";
+        clearInterval(timer);
+        document.getElementById("stop-test").style.display = "none";
+        userInput.disabled = true;
+        let timeTaken = 1;
+
+        console.log(time);
+        if (time != 0) {
+          timeTaken = (60 - time) / 100;
+        }
+        document.getElementById("wpm").innerText =
+          (userInput.value.length / 5 / timeTaken).toFixed(2) + " wpm";
+        document.getElementById("accuracy").innerText =
+          Math.round(
+            ((userInput.value.length - mistakes) / userInput.value.length) * 100
+          ) + "%";
+      };
+      // Start Test
+      const startTest = () => {
+        //initially
+        mistakes = 0;
+        timer = "";
+        userInput.disabled = false;
+        timeReduce();
+        document.getElementById("start-test").style.display = "none";
+        document.getElementById("stop-test").style.display = "block";
+      };
+
+      window.onload = () => {
+        userInput.value = "";
+        document.getElementById("start-test").style.display = "block";
+        document.getElementById("stop-test").style.display = "none";
+        userInput.disabled = true;
+        renderNewQuote();
+      };
+    </script>
+  </body>
+</html>

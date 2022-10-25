@@ -1,0 +1,95 @@
+
+
+ * {
+    padding: 0;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+  body {
+    background-image: linear-gradient(25deg, #a97b00 0, #ad7000 8.33%, #ac6303 16.67%, #a6540f 25%, #9b4415 33.33%, #8c3218 41.67%, #772017 50%, #610e15 58.33%, #4f0011 66.67%, #3f000e 75%, #33000a 83.33%, #2b0008 91.67%, #260009 100%);
+    min-height: 100vh;
+    display: -ms-grid;
+    display: grid;
+    place-items: center;
+  }
+
+  .container {
+    width: 95vw;
+    background-image: linear-gradient(225deg, #fdd7e2 0, #fed7de 3.33%, #ffd7da 6.67%, #ffd8d6 10%, #ffd8d3 13.33%, #fed9d0 16.67%, #fcdacd 20%, #fadbca 23.33%, #f8dcc8 26.67%, #f5ddc6 30%, #f1dec5 33.33%, #eedfc5 36.67%, #eae0c5 40%, #e6e2c5 43.33%, #e1e3c6 46.67%, #dde4c8 50%, #d9e5ca 53.33%, #d4e6cd 56.67%, #d0e7cf 60%, #cce8d3 63.33%, #c8e8d6 66.67%, #c5e9da 70%, #c2e9de 73.33%, #c0e9e2 76.67%, #bee9e6 80%, #bde9e9 83.33%, #bde9ed 86.67%, #bde8f0 90%, #bfe8f3 93.33%, #c0e7f6 96.67%, #c3e6f8 100%);
+    padding: 50px 15px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  }
+  a {
+   background-image: radial-gradient(circle at 50% 50%, #98a632 0, #9d9b2b 8.33%, #9e8e25 16.67%, #9b7f20 25%, #936f1d 33.33%, #875d1a 41.67%, #774a17 50%, #653914 58.33%, #552a11 66.67%, #481e0d 75%, #3c1509 83.33%, #330e05 91.67%, #2c0802 100%);
+    display: block;
+    width: 95vw;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 18px;
+    color: #3066f6;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  }
+  .success {
+    color: #44b267;
+  }
+  .fail {
+    color: #e81c4e;
+  }
+  .result {
+    display: none;
+  }
+  .stats {
+    text-align: right;
+    margin-bottom: 30px;
+    font-size: 18px;
+  }
+  .stats span {
+    font-weight: 600;
+  }
+  textarea {
+    resize: none;
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px 5px;
+    font-size: 16px;
+  }
+  #quote {
+    text-align: justify;
+    margin: 50px 0 30px 0;
+  }
+  button {
+    float: right;
+    margin-top: 20px;
+    background-image: linear-gradient(140deg, #b84576 0, #bb446a 3.33%, #bc455f 6.67%, #bb4753 10%, #b94a48 13.33%, #b64e3e 16.67%, #b15234 20%, #ac572b 23.33%, #a55c22 26.67%, #9d6019 30%, #946511 33.33%, #8b690b 36.67%, #816d08 40%, #767109 43.33%, #6b740f 46.67%, #5f7717 50%, #527920 53.33%, #437c2a 56.67%, #327d34 60%, #167f3f 63.33%, #00804a 66.67%, #008155 70%, #008261 73.33%, #00826d 76.67%, #008379 80%, #008385 83.33%, #008290 86.67%, #00829b 90%, #0081a5 93.33%, #0080ae 96.67%, #007eb5 100%);
+    color: #ffffff;
+    border: none;
+    font-size: 18px;
+    padding: 10px 30px;
+    border-radius: 5px;
+  }
+  .result {
+    margin-top: 40px;
+  }
+  .result h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+  .wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+  }
+  .wrapper span {
+    font-weight: 600;
+  }
